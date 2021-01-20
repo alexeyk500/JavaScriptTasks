@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select</title>
+  <link rel="stylesheet" type="text/css" href="./main.css">
+  <script src="hw_06_02.js"></script>
+  <script src="hw_06_03.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Задание №2 - Создание выпадающего списка</h1>
+    <h2 class="tableHeader">Содержимое списка, выбранное значение value-'Huawey'</h2>
+
+    <!-- Рисуем таблицу с элементами списка -->
+    <table class="tableItem">
+      <tr>
+      <th>Пункт</th>
+      <th>Значение</th>
+      </tr>
+      <tr>
+      <td>Apple</td>
+      <td>IPhone 12</td>
+      </tr>
+      <tr>
+        <td>Samsung</td>
+        <td>Galaxy S6</td>
+      </tr>
+      <tr>
+        <td class="selectedCell">Huawey</td>
+        <td>Honor A5</td>
+      </tr>
+      <tr>
+        <td>Vivo</td>
+        <td>Vivo X50</td>
+      </tr>
+    </table>
+
+    <!-- формируем массив данных из текста ячеек в таблице -->
+    <script type="text/javascript">
+
+      function item_list(value, label) {
+        this.value=value;
+        this.label=label;
+      }
+
+      let list_td = document.querySelectorAll('td')
+      let i = 0;
+      let cur_value = "";
+      let cur_label = "";
+      let listItem = [];
+      for(let cur_td of list_td) {
+        i+=1;
+        if (i%2 === 0) {
+          cur_label = cur_td.outerText;
+          let cur_item = new item_list(cur_value, cur_label)
+          listItem.push(cur_item)
+        } else {
+          cur_value = cur_td.outerText;
+        }
+      }
+    </script>
+
+    <!-- <script>console.log(listItem)</script> -->
+
+    <script type="text/javascript">
+      container = document.documentElement.children[1].children[0]
+      let selectedValue = document.querySelector(".selectedCell").textContent
+      container.appendChild(createSelect(listItem, selectedValue))
+      //document.body.appendChild(addSelect(listItem))
+    </script>
+
+    <!-- Еще один список c выбранным несуществующим значение value -->
+    <h2 class="tableHeader">Еще один список c несуществующим значение value-'Собака'</h2>
+    <p>{value: " Тигр", label: "Тигр"}</p>
+    <p>{value: "Пантера", label: "Пантера"}</p>
+    <p>{value: "Кот", label: "Кот"}</p>
+    <p>selectedValue = Собака</p>
+    <br>
+    <script>
+      let item_test_list = [];
+      item_test_list[0] = {value: " Тигр", label: "Тигр"}
+      item_test_list[1] = {value: "Пантера", label: "Пантера"}
+      item_test_list[2] = {value: "Кот", label: "Кот"}
+      // console.log(item_test_list)
+      container.appendChild(createSelect(item_test_list, 'Собака'))
+    </script>
+    <!-- Еще один список вообще без выбранного значения value -->
+    <h2 class="tableHeader">Еще один список вообще без выбранного значения value</h2>
+    <p>{value: "Маша", label: "Маша"}</p>
+    <p>{value: "Петя", label: "Петя"}</p>
+    <p>{value: "Ира", label: "Ира"}</p>
+    <p>selectedValue = нет</p>
+    <br>
+    <script>
+      let item_test1_list = [];
+      item_test1_list[0] = {value: "Маша", label: "Маша"}
+      item_test1_list[1] = {value: "Петя", label: "Петя"}
+      item_test1_list[2] = {value: "Ира", label: "Ира"}
+      // console.log(item_test1_list)
+      container.appendChild(createSelect(item_test1_list))
+    </script>
+
+    <h2 class="part3HomeWork">Дополнительное задание №3 - прочие виды входящих значений</h2>
+    <h2 class="tableHeader3part">Вариант №1 - Передаю массив из правильных обьектов</h2>
+    <p>{value: "Маша", label: "Маша"}</p>
+    <p>{value: "Петя", label: "Петя"}</p>
+    <p>{value: "Ира", label: "Ира"}</p>
+    <p>selectedValue = "Ира"</p>
+
+    <!-- Дополнительное задание №3 -->
+
+    <!-- Массив из правильных обьектов с value b label -->
+    <!-- Есть длинна и ключи -->
+    <script>
+      console.log('Передаю массив из правильных обьектов', item_test1_list);
+      let newListItem = getStandartListItem(item_test1_list);
+      container.appendChild(createSelect(newListItem, "Ира"))
+    </script>
+
+    <!-- Массив примитивных значений типа string или number -->
+    <!-- Есть длинна и нет ключей -->
+    <h2 class="tableHeader3part">Вариант №2 - Передаю Массив примитивных значений</h2>
+    <p>[1, 2, 5, 'семь', 'девять']</p>
+    <p>selectedValue = 5</p>
+    <script>
+      console.log('Передаю Массив примитивных значений', "[1, 2, 5, 'семь', 'девять']");
+      newListItem = getStandartListItem([1, 2, 5, 'семь', 'девять']);
+      container.appendChild(createSelect(newListItem, 5))
+    </script>
+
+    <!-- Объект с произвольными свойствами и значениями типа string или number -->
+    <!-- Есть длинна == undefined и нет ключей -->
+    <h2 class="tableHeader3part">Вариант №3 - Передаю Объект с произвольными свойствами и
+                                                        значениями типа string или number</h2>
+    <p>{ value1: 'Значение 1', value2: 'Значение 2', value3: 'Значение 3' }</p>
+    <p>selectedValue = value2</p>
+    <script>
+      console.log('Передаю Объект с произвольными свойствами и значениями типа string или number',
+                            "{ value1: 'Значение 1', value2: 'Значение 2', value3: 'Значение 3' }");
+      newListItem = getStandartListItem({ value1: 'Значение 1', value2: 'Значение 2', value3: 'Значение 3' });
+      document.documentElement.children[1].children[0].appendChild(createSelect(newListItem, 'value2'))
+    </script>
+  </div>
+</body>
+</html>

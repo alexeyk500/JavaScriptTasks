@@ -1,0 +1,55 @@
+.container {
+  width: 1200px;
+  margin: auto;
+}
+
+h1 {
+  color: red;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+p {
+  text-align: center;
+}
+
+.tableHeader {
+  color:blue;
+  text-align: center;
+}
+.tableHeader3part {
+  color:green;
+  text-align: center;
+}
+
+.part3HomeWork {
+  color: red;
+  text-align: center;
+  font-size: 32px;
+}
+
+.selectedCell{
+  background-color: lightblue;
+  color: rgb(131, 6, 27);
+}
+
+.tableItem {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 50px;
+  border-collapse: collapse;
+  border: 3px solid grey;
+  font-size: 20px;
+}
+
+th {
+  border: 3px solid grey;
+}
+
+tr, td {
+  border: 1px solid grey;
+}
